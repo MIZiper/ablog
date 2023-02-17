@@ -14,7 +14,7 @@
     <a href="{{ pathto(collection.path, 1) }}/atom.xml">
       <i class="fa fa-rss fa-rotate-270"></i></a>
       {% endif %}
-      {{ header }}
+      <span>{{ header }}</span>
       {% if collection.href %}
     <a href="{{ collection.href }}">{{ collection }}</a>
     {% else %}
@@ -47,15 +47,15 @@
         {% if fa %}
         <i class="fa fa-calendar"></i>
         {% endif %}
-        {{ post.date.strftime(ablog.post_date_format) }}
+        <span>{{ post.date.strftime(ablog.post_date_format) }}</span>
         {% else %}
         {% if fa %}
         <i class="fa fa-pencil"></i>
         {% endif %}
         {% if post.date %}
-        {{ post.date.strftime(ablog.post_date_format) }}
+        <span>{{ post.date.strftime(ablog.post_date_format) }}</span>
         {% else %}
-        Draft
+        <span>Draft</span>
         {% endif %}
         {% endif %}
       </li>
