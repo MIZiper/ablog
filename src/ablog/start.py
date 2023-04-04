@@ -479,7 +479,7 @@ def generate(d, overwrite=True, silent=False):
     d["author_texescaped"] = texescape.escape(str(d["author"]).translate(str(d["author"])))
     d["project_doc"] = d["project"] + " Documentation"
     d["project_doc_texescaped"] = texescape.escape(
-        str(d["project"] + " Documentation").translate(str(d["project"] + " Documentation"))
+        str(d["project"] + " Documentation").translate(str(d["project"] + " Documentation")),
     )
     if not path.isdir(d["path"]):
         ensuredir(d["path"])
@@ -492,7 +492,7 @@ def generate(d, overwrite=True, silent=False):
     def write_file(fpath, content, newline=None):
         if overwrite or not path.isfile(fpath):
             print(f"Creating file {fpath}.")
-            f = open(fpath, "wt", encoding="utf-8", newline=newline)
+            f = open(fpath, "w", encoding="utf-8", newline=newline)
             try:
                 f.write(content)
             finally:
@@ -534,8 +534,8 @@ def ask_user(d):
     print(
         w(
             "Please enter values for the following settings (just press Enter "
-            "to accept a default value, if one is given in brackets)."
-        )
+            "to accept a default value, if one is given in brackets).",
+        ),
     )
     print("")
     if "path" in d:
@@ -559,8 +559,8 @@ def ask_user(d):
                 "Project name will occur in several places in the website, "
                 "including blog archive pages and atom feeds. Later, you can "
                 "set separate names for different parts of the website in "
-                "configuration file."
-            )
+                "configuration file.",
+            ),
         )
         d["project"] = do_prompt("Project name")
     if "author" not in d:
@@ -569,27 +569,28 @@ def ask_user(d):
                 "This of author as the copyright holder of the content. "
                 "If your blog has multiple authors, you might want to enter "
                 "a team name here. Later, you can specify individual authors "
-                "using `blog_authors` configuration option."
-            )
+                "using `blog_authors` configuration option.",
+            ),
         )
         d["author"] = do_prompt("Author name(s)")
     d["release"] = d["version"] = ""
     while path.isfile(path.join(d["path"], d["master"] + d["suffix"])) or path.isfile(
-        path.join(d["path"], "source", d["master"] + d["suffix"])
+        path.join(d["path"], "source", d["master"] + d["suffix"]),
     ):
         print("")
         print(
             bold(
                 w(
                     f"Error: the master file {d['master'] + d['suffix']} has already been found in the "
-                    "selected root path."
-                )
-            )
+                    "selected root path.",
+                ),
+            ),
         )
         print("ablog-start will not overwrite the existing file.")
         print("")
         d["master"] = do_prompt(
-            w("Please enter a new file name, or rename the " "existing file and press Enter"), d["master"]
+            w("Please enter a new file name, or rename the " "existing file and press Enter"),
+            d["master"],
         )
     if "blog_baseurl" not in d:
         print("")
@@ -597,8 +598,8 @@ def ask_user(d):
             w(
                 "Please enter the base URL for your project. Blog feeds will "
                 "be generated relative to this URL. If you don't have one yet, "
-                "you can set it in configuration file later."
-            )
+                "you can set it in configuration file later.",
+            ),
         )
         d["blog_baseurl"] = do_prompt("Base URL for your project", None, lambda x: x)
     print("")

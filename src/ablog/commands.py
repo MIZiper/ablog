@@ -413,8 +413,8 @@ def ablog_deploy(
                 echo=True,
             )
         git_add = []
-        for tm in tomove:
-            for root, dirnames, filenames in os.walk(website):
+        for _tm in tomove:
+            for root, _dirnames, filenames in os.walk(website):
                 for filename in filenames:
                     fn = os.path.join(root, filename)
                     fnnew = fn.replace(website, repodir)
@@ -430,7 +430,7 @@ def ablog_deploy(
                     git_add.append(fnnew)
         print(f"Moved {len(git_add)} files to {github_pages}.github.io")
         os.chdir(repodir)
-        run("git add -f " + " ".join(['"{}"'.format(os.path.relpath(p)) for p in git_add]), echo=True)
+        run("git add -f " + " ".join([f'"{os.path.relpath(p)}"' for p in git_add]), echo=True)
         if not os.path.isfile(".nojekyll"):
             open(".nojekyll", "w")
             run("git add -f .nojekyll")
